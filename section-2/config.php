@@ -3,7 +3,7 @@
 return [
   'database' => [
     'host' => 'localhost',
-    'port' => 5432,
-    'dbname' => 'php-demo'
+    'port' => 3306,
+    'dbname' => 'phpdemo',
   ]
 ];
