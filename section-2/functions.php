@@ -1,9 +1,9 @@
 <?php
 
 // This is how we console.log in php, called "dump and die":
-function dd($value) {
+function dd($value, $value2 = null, $value3 = null) {
   echo "<pre>";
-  var_dump($value);
+  var_dump($value, $value2, $value3);
   echo "</pre>";
   die();
 }
