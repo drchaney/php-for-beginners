@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header('location: /notes');
     exit();
-} else 
+} else {
     $note = $db->query('select * from notes where id = :id', [
         'id' => $_GET['id']
     ])->findOrFail();
