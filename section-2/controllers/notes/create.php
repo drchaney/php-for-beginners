@@ -1,18 +1,14 @@
 <?php
 
-require 'Validator.php';
-
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
-$heading = "Create a note";
-// dd($_SERVER); -- view ALL details about the server
-// dd($_POST); -- view the post (what came across on the user's form)
+
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = [];
 
-    if (! Validator::checkStringLength($_POST['note'], 1, 1000)){
-        $errors['note'] = 'A note has at least one character and is shorter than a novel (1k char max)';
+    if (! Validator::string($_POST['note'], 1, 1000)) {
+        $errors['note'] = 'A note of no more than 1,000 characters is required.';
     }
 
     if (empty($errors)) {
@@ -23,4 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require 'views/notes/create.view.php';
+view("notes/create.view.php", [
+    'heading' => 'Create Note',
+    'errors' => $errors
+]);

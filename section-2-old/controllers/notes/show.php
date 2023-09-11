@@ -1,17 +1,16 @@
 <?php
 
-$config = require base_path('config.php');
+$config = require('config.php');
 $db = new Database($config['database']);
 
+$heading = "Note";
 $currentUserId = 1;
+// dd($_GET['id']); --> shows me the id of example.com/note?id=1, so "1"
 
 $note = $db->query('select * from notes where id = :id', [
-    'id' => $_GET['id']
+  'id' => $_GET['id']
 ])->findOrFail();
 
 authorize($note['user_id'] === $currentUserId);
 
-view("notes/show.view.php", [
-    'heading' => 'Note',
-    'note' => $note
-]);
+require "views/notes/show.view.php";
